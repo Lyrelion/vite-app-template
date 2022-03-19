@@ -12,13 +12,12 @@
 </template>
 
 <script lang="ts">
-import {
-  reactive, toRefs, defineComponent,
-} from 'vue';
-import store from '../store'
+import { reactive, toRefs, defineComponent } from "vue";
+import store from "../store";
+import http from "../utils/http";
 
 export default defineComponent({
-  name: 'Home',
+  name: "Home",
   components: {},
   setup(props: any, context: any) {
     const state = reactive({
@@ -30,6 +29,10 @@ export default defineComponent({
       store.commit("addNum");
       console.log(store.state.num);
     };
+
+    http({ url: "/getUserInfo", method: "get" }).then((res) => {
+      console.log('测试接口请求', res);
+    });
     
     return {
       ...toRefs(state),
@@ -40,6 +43,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
