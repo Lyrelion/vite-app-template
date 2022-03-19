@@ -37,9 +37,14 @@ export default defineComponent({
       console.log(store.state.num);
     };
 
-    http({ url: '/getUserInfo', method: 'get' }).then((res) => {
-      console.log('测试接口请求', res);
-    });
+    http
+      .get('/getUserInfo')
+      .then((res) => {
+        console.log('res ===', res);
+      })
+      .catch((err) => {
+        console.log('err ===', err);
+      });
 
     const deepCopyTest = {
       prototype: {
