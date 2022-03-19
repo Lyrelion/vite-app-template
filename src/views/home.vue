@@ -15,6 +15,7 @@
 import { reactive, toRefs, defineComponent } from "vue";
 import store from "../store";
 import http from "../utils/http";
+import * as _ from 'lodash';
 
 export default defineComponent({
   name: "Home",
@@ -33,6 +34,20 @@ export default defineComponent({
     http({ url: "/getUserInfo", method: "get" }).then((res) => {
       console.log('测试接口请求', res);
     });
+
+    const deepCopyTest = {
+      prototype: {
+        protoTypeInner: {
+          value: '111',
+          list: [{
+            code: 'aaa',
+            startTime: new Date(),
+          }]
+        }
+      }
+    };
+
+    console.log('测试 loadsh 深拷贝', _.cloneDeep(deepCopyTest));
     
     return {
       ...toRefs(state),
