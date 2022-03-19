@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>首页</h2>
+    <img :src="imgTest"/>
     <br />
     <span>{{ `通过 state 获取的 store 数据，没有及时更新 ${storeNum}` }}</span>
     <br />
@@ -11,27 +12,32 @@
   </div>
 </template>
 
-<script lang="ts">
-import { reactive, toRefs, defineComponent } from "vue";
-import store from "../store";
-import http from "../utils/http";
+<script lang='ts'>
+import { reactive, toRefs, defineComponent } from 'vue';
 import * as _ from 'lodash';
+import store from '../store';
+import http from '@/utils/http';
+// vite 项目中，只能使用 import 导入图片,不能使用 require 导入图片
+import logoPng from '@/assets/logo.png';
 
 export default defineComponent({
-  name: "Home",
+  name: 'Home',
   components: {},
   setup(props: any, context: any) {
     const state = reactive({
       storeNum: store.state.num,
     });
 
+    // const imgTest = require('@/assets/logo.png');
+    const imgTest = logoPng;
+
     const changeStore = () => {
       console.log(store.state.num);
-      store.commit("addNum");
+      store.commit('addNum');
       console.log(store.state.num);
     };
 
-    http({ url: "/getUserInfo", method: "get" }).then((res) => {
+    http({ url: '/getUserInfo', method: 'get' }).then((res) => {
       console.log('测试接口请求', res);
     });
 
@@ -39,23 +45,26 @@ export default defineComponent({
       prototype: {
         protoTypeInner: {
           value: '111',
-          list: [{
-            code: 'aaa',
-            startTime: new Date(),
-          }]
-        }
-      }
+          list: [
+            {
+              code: 'aaa',
+              startTime: new Date(),
+            },
+          ],
+        },
+      },
     };
 
-    console.log('测试 loadsh 深拷贝', _.cloneDeep(deepCopyTest));
-    
+    console.log('测试 lodash 深拷贝', _.cloneDeep(deepCopyTest));
+
     return {
       ...toRefs(state),
       changeStore,
       store,
+      imgTest,
     };
   },
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang='scss' scoped></style>

@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 export default createStore({
   state: {
     listData: { 1: 10 },
@@ -14,7 +14,7 @@ export default createStore({
   },
   actions: {
     setData(context, value) {
-      context.commit("setData", value);
+      context.commit('setData', value);
     },
   },
   modules: {},

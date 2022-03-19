@@ -1,13 +1,13 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "Home",
+    path: '/',
+    name: 'Home',
     meta: {
-      title: "首页",
+      title: '首页',
       keepAlive: true
     },
-    component: () => import("../views/home.vue"),
+    component: () => import('@/views/home.vue'),
   },
 ];
 const router = createRouter({
